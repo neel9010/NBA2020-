@@ -64,18 +64,34 @@ namespace NBA2020
             //I am lazy so repeating loop over - spent way too much time on this!
             for (int n = 1; n < 3; n++)
             {
-                List_1.Clear();
-                List_2.Clear();
-                for (int i = 0; i < 30; i++)
-                {
-                    Team Team = Teams[i];
-                    List_1.Add(Team);
-                }
 
-                for (int i = 29; i >= 0; i--)
+                if (n == 1)
                 {
-                    Team Team = Teams[i];
-                    List_2.Add(Team);
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Team Team = Teams[i];
+                        List_1.Add(Team);
+                    }
+
+                    for (int i = 29; i >= 0; i--)
+                    {
+                        Team Team = Teams[i];
+                        List_2.Add(Team);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < 30; i++)
+                    {
+                        Team Team = Teams[i];
+                        List_2.Add(Team);
+                    }
+
+                    for (int i = 29; i >= 0; i--)
+                    {
+                        Team Team = Teams[i];
+                        List_1.Add(Team);
+                    }
                 }
 
                 Team HomeTeam;
@@ -95,6 +111,7 @@ namespace NBA2020
                         HomeTeam.HOME_GAME++;
 
                         Console.WriteLine(HomeTeam.NAME + " ( " + HomeTeam.NUM + " )   - VS -  " + AwayTeam.NAME + " ( " + AwayTeam.NUM + " )");
+                        //Console.WriteLine(HomeTeam.NUM + "  VS  " + AwayTeam.NUM);
                         Team Team = HomeTeam;
                         Round_2.Add(HomeTeam);
                         Team = AwayTeam;
@@ -106,54 +123,72 @@ namespace NBA2020
                     {
                         List_1.Clear();
                         List_2.Clear();
+
+
                         Team Team = Teams[0];
-                        List_1.Add(Team);
+
+                        if (n == 1) { List_1.Add(Team); } else { List_2.Add(Team); }
 
                         for (int j = 16; j <= 29; j++)
                         {
                             Team = Teams[j];
-                            List_1.Add(Team);
+                            if (n == 1) { List_1.Add(Team); } else { List_2.Add(Team); }
                         }
 
                         for (int j = 1; j < 16; j++)
                         {
                             Team = Teams[j];
-                            List_1.Add(Team);
+                            if (n == 1) { List_1.Add(Team); } else { List_2.Add(Team); }
                         }
 
                         Team = Teams[15];
-                        List_2.Add(Team);
+                        if (n == 1) { List_2.Add(Team); } else { List_1.Add(Team); }
+
                         for (int j = 14; j > 0; j--)
                         {
                             Team = Teams[j];
-                            List_2.Add(Team);
+                            if (n == 1) { List_2.Add(Team); } else { List_1.Add(Team); }
                         }
 
                         for (int j = 29; j > 14; j--)
                         {
                             Team = Teams[j];
-                            List_2.Add(Team);
+                            if (n == 1) { List_2.Add(Team); } else { List_1.Add(Team); }
                         }
                         Team = Teams[0];
-                        List_2.Add(Team);
+                        if (n == 1) { List_2.Add(Team); } else { List_1.Add(Team); }
                     }
 
                     Shuffle_Teams.Arrange_Lists(ref List_1, ref List_2);
 
-                    if (i % 2 == 0)
+                    //Another bad way to do this!
+                    if (i == 29 && n == 1)
                     {
-                        HomeList = List_1;
-                        AwayList = List_2;
+
                     }
                     else
                     {
-                        HomeList = List_2;
-                        AwayList = List_1;
+                        if (i % 2 == 0)
+                        {
+                            HomeList = List_1;
+                            AwayList = List_2;
+                        }
+                        else
+                        {
+                            HomeList = List_2;
+                            AwayList = List_1;
+                        }
                     }
 
                     Console.WriteLine();
 
                     round_count++;
+
+                    if (i == 29)
+                    {
+                        List_1.Clear();
+                        List_2.Clear();
+                    }
                 }
 
                 Console.WriteLine();

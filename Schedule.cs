@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -59,29 +59,31 @@ namespace NBA2020
 
             Console.WriteLine("------------------------------------");
 
-            for (int i = 0; i < 30; i++)
-            {
-                Team Team = Teams[i];
-                List_1.Add(Team);
-            }
-
-            for (int i = 29; i >= 0; i--)
-            {
-                Team Team = Teams[i];
-                List_2.Add(Team);
-            }
-
-            Team HomeTeam;
-            Team AwayTeam;
-
-            List<Team> HomeList = List_1;
-            List<Team> AwayList = List_2;
-
             Console.WriteLine();
 
             //I am lazy so repeating loop over - spent way too much time on this!
             for (int n = 1; n < 3; n++)
             {
+                List_1.Clear();
+                List_2.Clear();
+                for (int i = 0; i < 30; i++)
+                {
+                    Team Team = Teams[i];
+                    List_1.Add(Team);
+                }
+
+                for (int i = 29; i >= 0; i--)
+                {
+                    Team Team = Teams[i];
+                    List_2.Add(Team);
+                }
+
+                Team HomeTeam;
+                Team AwayTeam;
+
+                List<Team> HomeList = List_1;
+                List<Team> AwayList = List_2;
+
                 for (int i = 1; i < 30; i++)
                 {
                     Console.WriteLine("------------------- ROUND - " + round_count + " -----------------");
@@ -90,6 +92,7 @@ namespace NBA2020
                     {
                         HomeTeam = HomeList[j];
                         AwayTeam = AwayList[j];
+                        HomeTeam.HOME_GAME++;
 
                         Console.WriteLine(HomeTeam.NAME + " ( " + HomeTeam.NUM + " )   - VS -  " + AwayTeam.NAME + " ( " + AwayTeam.NUM + " )");
                         Team Team = HomeTeam;
@@ -156,7 +159,6 @@ namespace NBA2020
                 Console.WriteLine();
             }
         }
-
     }
 
     public static class Shuffle_Teams
